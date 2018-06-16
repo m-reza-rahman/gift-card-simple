@@ -1,9 +1,15 @@
-# giftcard-demo-series
-Series of Axon Framework demo applications focused around a simple gift card domain, designed
-to show various aspects of the framework. The examples show configurations for multiple technology
-stacks: running both locally and distributed using AxonHub, and running with single or multiple relational databases,
-and AxonDB as event store. All examples have a GUI built using Vaadin.
+# giftcard-multiconfig-monolith
 
-See [the wikipedia article](https://en.wikipedia.org/wiki/Gift_card) for a basic definition of gift cards. Essentially, there are just two events in the life cycle of a gift card:
-* They get _issued_: a new gift card gets created with some amount of money stored.
-* They get _redeemed_: all or part of the monetary value stored on the gift card is used to purchase something.
+This example shows, among other things, how an Axon application can easily be configured 
+to run on different types of infrastructure, because Axon Framework encourages a very clear
+separation between business logic and infrastructure.
+
+Dependent on the activated profile, this application can run:
+* Fully on an embedded H2 database
+* On 2 separate Postgres databases
+* On a combination of Postgres and AxonIQ's [AxonDB](https://axoniq.io/products/axondb.html)
+
+The application has a small GUI running on port 8080 (implemented using [Vaadin](https://vaadin.com/)) where you can issue single cards, bulk issue cards, redeem cards,
+and view a list of cards.
+
+ 
