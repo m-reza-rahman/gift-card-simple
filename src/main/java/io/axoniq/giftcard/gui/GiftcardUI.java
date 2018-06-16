@@ -1,7 +1,7 @@
 package com.example.giftcard.gui;
 
-import com.example.giftcard.command.IssueCmd;
-import com.example.giftcard.command.RedeemCmd;
+import io.axoniq.giftcard.command.IssueCommand;
+import io.axoniq.giftcard.command.RedeemCommand;
 import com.example.giftcard.query.CardSummary;
 import com.vaadin.annotations.Push;
 import com.vaadin.server.DefaultErrorHandler;
@@ -71,7 +71,7 @@ public class GiftcardUI extends UI {
         Button submit = new Button("Submit");
 
         submit.addClickListener(evt -> {
-            commandGateway.sendAndWait(new IssueCmd(id.getValue(), Integer.parseInt(amount.getValue())));
+            commandGateway.sendAndWait(new IssueCommand(id.getValue(), Integer.parseInt(amount.getValue())));
             Notification.show("Success", Notification.Type.HUMANIZED_MESSAGE);
         });
 
@@ -92,7 +92,7 @@ public class GiftcardUI extends UI {
         submit.addClickListener(evt -> {
             for(int i = 0; i < Integer.parseInt(number.getValue()); i++) {
                 String id = UUID.randomUUID().toString().substring(0, 11).toUpperCase();
-                commandGateway.sendAndWait(new IssueCmd(id, Integer.parseInt(amount.getValue())));
+                commandGateway.sendAndWait(new IssueCommand(id, Integer.parseInt(amount.getValue())));
             }
             Notification.show("Success", Notification.Type.HUMANIZED_MESSAGE);
         });
@@ -112,7 +112,7 @@ public class GiftcardUI extends UI {
         Button submit = new Button("Submit");
 
         submit.addClickListener(evt -> {
-            commandGateway.sendAndWait(new RedeemCmd(id.getValue(), Integer.parseInt(amount.getValue())));
+            commandGateway.sendAndWait(new RedeemCommand(id.getValue(), Integer.parseInt(amount.getValue())));
             Notification.show("Success", Notification.Type.HUMANIZED_MESSAGE);
         });
 
