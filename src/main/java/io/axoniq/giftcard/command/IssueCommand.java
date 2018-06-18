@@ -2,8 +2,13 @@ package io.axoniq.giftcard.command;
 
 public class IssueCommand {
 
-    private String id;
-    private int amount;
+    private final String id;
+    private final int amount;
+
+    public IssueCommand(String id, int amount) {
+        this.id = id;
+        this.amount = amount;
+    }
 
     public String getId() {
         return id;

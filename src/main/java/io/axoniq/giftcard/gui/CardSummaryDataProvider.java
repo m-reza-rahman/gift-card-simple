@@ -1,14 +1,23 @@
-package com.example.giftcard.gui;
+package io.axoniq.giftcard.gui;
 
-import com.example.giftcard.query.*;
 import com.vaadin.data.provider.CallbackDataProvider;
-import org.axonframework.eventhandling.*;
+import io.axoniq.giftcard.query.CardSummariesUpdatedEvt;
+import io.axoniq.giftcard.query.CardSummary;
+import io.axoniq.giftcard.query.CountCardSummariesQuery;
+import io.axoniq.giftcard.query.CountCardSummariesResponse;
+import io.axoniq.giftcard.query.FindCardSummariesQuery;
+import io.axoniq.giftcard.query.FindCardSummariesResponse;
+import java.lang.invoke.MethodHandles;
+import java.util.UUID;
+import org.axonframework.eventhandling.AnnotationEventListenerAdapter;
+import org.axonframework.eventhandling.EventBus;
+import org.axonframework.eventhandling.EventHandler;
+import org.axonframework.eventhandling.EventListener;
+import org.axonframework.eventhandling.SimpleEventHandlerInvoker;
+import org.axonframework.eventhandling.SubscribingEventProcessor;
 import org.axonframework.queryhandling.QueryGateway;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.lang.invoke.MethodHandles;
-import java.util.UUID;
 
 public class CardSummaryDataProvider extends CallbackDataProvider<CardSummary, Void> {
 
@@ -47,5 +56,4 @@ public class CardSummaryDataProvider extends CallbackDataProvider<CardSummary, V
         log.info("received {}", evt);
         refreshAll();
     }
-
 }

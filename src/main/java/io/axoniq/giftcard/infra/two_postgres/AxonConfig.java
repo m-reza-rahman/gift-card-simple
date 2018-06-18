@@ -1,6 +1,6 @@
-package com.example.giftcard.infra.two_postgres;
+package io.axoniq.giftcard.infra.two_postgres;
 
-import com.example.giftcard.query.CardSummaryProjection;
+import io.axoniq.giftcard.query.CardSummaryProjection;
 import org.axonframework.config.EventHandlingConfiguration;
 import org.axonframework.eventhandling.EventBus;
 import org.axonframework.eventhandling.SimpleEventBus;

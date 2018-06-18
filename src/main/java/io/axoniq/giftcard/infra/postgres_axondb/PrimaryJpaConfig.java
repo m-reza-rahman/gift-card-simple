@@ -1,6 +1,6 @@
-package com.example.giftcard.infra.postgres_axondb;
+package io.axoniq.giftcard.infra.postgres_axondb;
 
-import com.example.giftcard.query.CardSummary;
+import io.axoniq.giftcard.query.CardSummary;
 import org.axonframework.eventhandling.tokenstore.jpa.TokenEntry;
 import org.flywaydb.core.Flyway;
 import org.hibernate.boot.Metadata;

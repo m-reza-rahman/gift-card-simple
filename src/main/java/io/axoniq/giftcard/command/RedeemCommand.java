@@ -5,8 +5,13 @@ import org.axonframework.commandhandling.TargetAggregateIdentifier;
 public class RedeemCommand {
 
     @TargetAggregateIdentifier
-    private String id;
-    private int amount;
+    private final String id;
+    private final int amount;
+
+    public RedeemCommand(String id, int amount) {
+        this.id = id;
+        this.amount = amount;
+    }
 
     public String getId() {
         return id;

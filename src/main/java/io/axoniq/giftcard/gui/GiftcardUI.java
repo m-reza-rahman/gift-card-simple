@@ -1,13 +1,13 @@
-package com.example.giftcard.gui;
+package io.axoniq.giftcard.gui;
 
 import io.axoniq.giftcard.command.IssueCommand;
 import io.axoniq.giftcard.command.RedeemCommand;
-import com.example.giftcard.query.CardSummary;
 import com.vaadin.annotations.Push;
 import com.vaadin.server.DefaultErrorHandler;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.spring.annotation.SpringUI;
 import com.vaadin.ui.*;
+import io.axoniq.giftcard.query.CardSummary;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.axonframework.eventhandling.EventBus;
 import org.axonframework.queryhandling.QueryGateway;
@@ -53,7 +53,9 @@ public class GiftcardUI extends UI {
             public void error(com.vaadin.server.ErrorEvent event) {
                 Throwable cause = event.getThrowable();
                 log.error("an error occured", cause);
-                while(cause.getCause() != null) cause = cause.getCause();
+                while (cause.getCause() != null) {
+                    cause = cause.getCause();
+                }
                 Notification.show("Error", cause.getMessage(), Notification.Type.ERROR_MESSAGE);
             }
         });
@@ -90,7 +92,7 @@ public class GiftcardUI extends UI {
         Button submit = new Button("Submit");
 
         submit.addClickListener(evt -> {
-            for(int i = 0; i < Integer.parseInt(number.getValue()); i++) {
+            for (int i = 0; i < Integer.parseInt(number.getValue()); i++) {
                 String id = UUID.randomUUID().toString().substring(0, 11).toUpperCase();
                 commandGateway.sendAndWait(new IssueCommand(id, Integer.parseInt(amount.getValue())));
             }

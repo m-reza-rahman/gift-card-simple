@@ -1,6 +1,6 @@
-package com.example.giftcard.infra.two_postgres;
+package io.axoniq.giftcard.infra.two_postgres;
 
-import com.example.giftcard.query.CardSummary;
+import io.axoniq.giftcard.query.CardSummary;
 import org.axonframework.common.jpa.EntityManagerProvider;
 import org.axonframework.common.jpa.SimpleEntityManagerProvider;
 import org.axonframework.common.transaction.TransactionManager;
