@@ -29,7 +29,7 @@ import java.util.Map;
 
 @Profile("pg_axondb")
 @Configuration
-@EntityScan({"org.axonframework.eventhandling.tokenstore.jpa", "com.example.giftcard.query"})
+@EntityScan({"org.axonframework.eventhandling.tokenstore.jpa", "io.axoniq.giftcard.query"})
 public class PrimaryJpaConfig  {
 
     /************************************************************************

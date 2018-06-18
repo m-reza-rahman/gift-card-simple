@@ -1,4 +1,4 @@
-package com.example.giftcard.infra.two_postgres;
+package io.axoniq.giftcard.infra.two_postgres;
 
 import org.axonframework.commandhandling.CommandBus;
 import org.axonframework.commandhandling.SimpleCommandBus;

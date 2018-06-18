@@ -1,4 +1,4 @@
-package com.example.giftcard.infra.postgres_axondb;
+package io.axoniq.giftcard.infra.postgres_axondb;
 
 import io.axoniq.axondb.client.AxonDBConfiguration;
 import io.axoniq.axondb.client.axon.AxonDBEventStore;

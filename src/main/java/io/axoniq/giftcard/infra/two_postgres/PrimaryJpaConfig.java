@@ -94,7 +94,7 @@ public class PrimaryJpaConfig  {
                 .dataSource(dataSource)
                 .properties(jpaProperties.getProperties())
                 .packages("org.axonframework.eventhandling.tokenstore.jpa",
-                        "com.example.giftcard.query")
+                        "io.axoniq.giftcard.query")
                 .persistenceUnit("primary")
                 .build();
     }
