@@ -1,13 +1,14 @@
-# giftcard-multiconfig-monolith
+# Simple Gift Card
 
-This example shows, among other things, how an Axon application can easily be configured 
-to run on different types of infrastructure, because Axon Framework encourages a very clear
-separation between business logic and infrastructure.
+This simple application demonstrates the CQRS (Command Query Responsibility Segregation) and Event Sourcing patterns using the Axon Java Framework. The domain used is gift cards. This application is demoed during this [presentation](https://speakerdeck.com/reza_rahman/what-is-cqrs-plus-event-sourcing-and-why-should-java-developers-care). Gift cards themselves are event sourced aggregate entities that constitute the write model, execute commands and emit events. The read model handles events, constructs several materialized views and powers several queries.   
 
-Dependent on the activated profile, this application can run:
-* Fully on an embedded H2 database
-* On 2 separate Postgres databases
-* On a combination of Postgres and AxonIQ's [AxonDB](https://axoniq.io/products/axondb.html)
+The Maven based application only requires Java SE 8 (or up). You should be able to open the application in any Maven capable IDE. Once built, you can run the application through the following command.
+
+```
+java -jar gift-card-simple-1.0.jar
+```
+
+Once the application is up and running, you can access it via http://localhost:8080. 
 
 The application has a small GUI running on port 8080 (implemented using [Vaadin](https://vaadin.com/)) where you can issue single cards, bulk issue cards, redeem cards,
 and view a list of cards.
