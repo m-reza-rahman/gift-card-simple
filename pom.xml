@@ -9,7 +9,7 @@
     <packaging>jar</packaging>
 
     <name>gift-card-simple</name>
-    <description>Axon Framework demo project, showing multiple monolith configurations</description>
+    <description>Simple demo application showing CQRS, Event Sourcing and Axon Framework</description>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -23,20 +23,16 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
         <axon.version>3.1.2</axon.version>
-        <axondb.version>1.1</axondb.version>
         <vaadin.version>8.2.0</vaadin.version>
     </properties>
 
     <dependencies>
-        <!-- This will of course be an Axon application. We're adding Kotlin to easily
-        write command and event classes. -->
         <dependency>
             <groupId>org.axonframework</groupId>
             <artifactId>axon-spring-boot-starter</artifactId>
             <version>${axon.version}</version>
         </dependency>
-		
-        <!-- Database dependencies: JPA, Flyway for schema set-up, and both Postgres and H2 drivers. -->
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -45,13 +41,6 @@
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <scope>runtime</scope>
-        </dependency>
-
-        <!-- AxonDB: alternative to storing events and snapshots -->
-        <dependency>
-            <groupId>io.axoniq</groupId>
-            <artifactId>axondb-client</artifactId>
-            <version>${axondb.version}</version>
         </dependency>
 
         <!-- We'll include a small GUI in our application quickly built using Vaadin. -->
@@ -82,37 +71,6 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.5.1</version>
-                <executions>
-                    <!-- Replacing default-compile as it is treated specially by maven -->
-                    <execution>
-                        <id>default-compile</id>
-                        <phase>none</phase>
-                    </execution>
-                    <!-- Replacing default-testCompile as it is treated specially by maven -->
-                    <execution>
-                        <id>default-testCompile</id>
-                        <phase>none</phase>
-                    </execution>
-                    <execution>
-                        <id>java-compile</id>
-                        <phase>compile</phase>
-                        <goals> 
-                            <goal>compile</goal> 
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>java-test-compile</id>
-                        <phase>test-compile</phase>
-                        <goals> 
-                            <goal>testCompile</goal> 
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>
