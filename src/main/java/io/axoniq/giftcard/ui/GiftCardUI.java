@@ -28,9 +28,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 
 @SpringUI
 @Push
-public class GiftcardUI extends UI {
+public class GiftCardUI extends UI {
 
-    private final static Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
+    private final static Logger logger = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
     private final CommandGateway commandGateway;
     private final QueryGateway queryGateway;
@@ -38,7 +38,7 @@ public class GiftcardUI extends UI {
 
     private CardSummaryDataProvider cardSummaryDataProvider;
 
-    public GiftcardUI(CommandGateway commandGateway, QueryGateway queryGateway, @Qualifier("queryUpdates") EventBus queryUpdateEventBus) {
+    public GiftCardUI(CommandGateway commandGateway, QueryGateway queryGateway, @Qualifier("queryUpdates") EventBus queryUpdateEventBus) {
         this.commandGateway = commandGateway;
         this.queryGateway = queryGateway;
         this.queryUpdateEventBus = queryUpdateEventBus;
@@ -60,7 +60,7 @@ public class GiftcardUI extends UI {
             @Override
             public void error(com.vaadin.server.ErrorEvent event) {
                 Throwable cause = event.getThrowable();
-                log.error("an error occured", cause);
+                logger.error("An error occured", cause);
                 while (cause.getCause() != null) {
                     cause = cause.getCause();
                 }
@@ -76,7 +76,7 @@ public class GiftcardUI extends UI {
     }
 
     private Panel issuePanel() {
-        TextField id = new TextField("Card id");
+        TextField id = new TextField("Card ID");
         TextField amount = new TextField("Amount");
         Button submit = new Button("Submit");
 
@@ -117,7 +117,7 @@ public class GiftcardUI extends UI {
     }
 
     private Panel redeemPanel() {
-        TextField id = new TextField("Card id");
+        TextField id = new TextField("Card ID");
         TextField amount = new TextField("Amount");
         Button submit = new Button("Submit");
 
@@ -137,6 +137,7 @@ public class GiftcardUI extends UI {
 
     private Grid summaryGrid() {
         cardSummaryDataProvider = new CardSummaryDataProvider(queryGateway, queryUpdateEventBus);
+
         Grid<CardSummary> grid = new Grid<>();
         grid.addColumn(CardSummary::getId).setCaption("Card ID");
         grid.addColumn(CardSummary::getInitialValue).setCaption("Initial value");
@@ -144,7 +145,7 @@ public class GiftcardUI extends UI {
         grid.addColumn(CardSummary::getRemainingValue).setCaption("Remaining value");
         grid.setSizeFull();
         grid.setDataProvider(cardSummaryDataProvider);
+
         return grid;
     }
-
 }
