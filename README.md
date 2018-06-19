@@ -8,7 +8,9 @@ The Maven based application only requires Java SE 8 (or up). You should be able 
 java -jar gift-card-simple-1.0.jar
 ```
 
-Once the application is up and running, you can access it via http://localhost:8080. 
+Once the application is up and running, you can access it via http://localhost:8080.
+
+![UI][https://raw.githubusercontent.com/m-reza-rahman/gift-card-simple/master/screenshots/h2.jpg]
 
 The application has a small GUI running on port 8080 (implemented using [Vaadin](https://vaadin.com/)) where you can issue single cards, bulk issue cards, redeem cards,
 and view a list of cards.
