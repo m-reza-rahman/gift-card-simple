@@ -49,18 +49,17 @@ public class GiftCard {
     }
 
     @EventSourcingHandler
-    public void on(IssuedEvent IssuedEvent) {
-        logger.info("applying {}", IssuedEvent);
-        id = IssuedEvent.getId();
-        remainingValue = IssuedEvent.getAmount();
-        logger.info("new remaining value: {}", remainingValue);
+    public void on(IssuedEvent issuedEvent) {
+        logger.info("Applying {}", issuedEvent);
+        id = issuedEvent.getId();
+        remainingValue = issuedEvent.getAmount();
+        logger.info("Issued amount: {}", remainingValue);
     }
 
     @EventSourcingHandler
-    public void on(RedeemedEvent evt) {
-        logger.info("applying {}", evt);
-        remainingValue -= evt.getAmount();
-        logger.info("new remaining value: {}", remainingValue);
+    public void on(RedeemedEvent redeemedEvent) {
+        logger.info("Applying {}", redeemedEvent);
+        remainingValue -= redeemedEvent.getAmount();
+        logger.info("Remaining value: {}", remainingValue);
     }
-
 }

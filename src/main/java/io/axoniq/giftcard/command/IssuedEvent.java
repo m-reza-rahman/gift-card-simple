@@ -17,4 +17,9 @@ public class IssuedEvent {
     public int getAmount() {
         return amount;
     }
+
+    @Override
+    public String toString() {
+        return "Issued event with ID=" + id + ", amount=" + amount;
+    }
 }

@@ -17,4 +17,9 @@ public class RedeemedEvent {
     public int getAmount() {
         return amount;
     }
+
+    @Override
+    public String toString() {
+        return "Redeemed event with ID=" + id + ", amount=" + amount;
+    }
 }
