@@ -11,4 +11,9 @@ public class CardSummariesUpdatedEvent {
     public String getId() {
         return id;
     }
+
+    @Override
+    public String toString() {
+        return "Card summaries updated event with ID=" + id;
+    }
 }

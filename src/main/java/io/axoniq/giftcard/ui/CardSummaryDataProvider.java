@@ -23,35 +23,37 @@ public class CardSummaryDataProvider extends CallbackDataProvider<CardSummary, V
 
     private final static Logger logger = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
-    private final SubscribingEventProcessor processor;
+    private final SubscribingEventProcessor subscribingEventProcessor;
 
     public CardSummaryDataProvider(QueryGateway queryGateway, EventBus queryUpdateEventBus) {
         super(q -> {
-                    FindCardSummariesQuery query = new FindCardSummariesQuery(q.getOffset(), q.getLimit());
-                    FindCardSummariesResult response = queryGateway.send(query, FindCardSummariesResult.class).join();
-                    return response.getCardSummaries().stream();
-                },
+            FindCardSummariesQuery query = new FindCardSummariesQuery(q.getOffset(), q.getLimit());
+            FindCardSummariesResult result = queryGateway.send(query, FindCardSummariesResult.class).join();
+
+            return result.getCardSummaries().stream();
+        },
                 q -> {
                     CountCardSummariesQuery query = new CountCardSummariesQuery();
-                    CountCardSummariesResult response = queryGateway.send(query, CountCardSummariesResult.class).join();
-                    return response.getCount();
+                    CountCardSummariesResult result = queryGateway.send(query, CountCardSummariesResult.class).join();
+
+                    return result.getCount();
                 }
         );
 
-        EventListener listener = new AnnotationEventListenerAdapter(this);
-        processor = new SubscribingEventProcessor(UUID.randomUUID().toString(),
-                new SimpleEventHandlerInvoker(listener), queryUpdateEventBus);
-        processor.start();
+        EventListener eventListener = new AnnotationEventListenerAdapter(this);
+        subscribingEventProcessor = new SubscribingEventProcessor(UUID.randomUUID().toString(),
+                new SimpleEventHandlerInvoker(eventListener), queryUpdateEventBus);
+        subscribingEventProcessor.start();
     }
 
     public void shutDown() {
-        processor.shutDown();
+        subscribingEventProcessor.shutDown();
     }
 
     @EventHandler
-    public void on(CardSummariesUpdatedEvent evt) {
-        logger.info("received {}", evt);
+    public void on(CardSummariesUpdatedEvent cardSummariesUpdatedEvent) {
+        logger.info("Received {}", cardSummariesUpdatedEvent);
+
         refreshAll();
     }
-
 }
