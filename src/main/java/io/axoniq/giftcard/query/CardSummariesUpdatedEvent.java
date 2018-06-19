@@ -1,10 +1,10 @@
 package io.axoniq.giftcard.query;
 
-public class CardSummariesUpdatedEvt {
+public class CardSummariesUpdatedEvent {
 
     private final String id;
 
-    public CardSummariesUpdatedEvt(String id) {
+    public CardSummariesUpdatedEvent(String id) {
         this.id = id;
     }
 

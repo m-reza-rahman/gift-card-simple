@@ -1,4 +1,4 @@
-package io.axoniq.giftcard.gui;
+package io.axoniq.giftcard.ui;
 
 import com.vaadin.annotations.Push;
 import com.vaadin.server.DefaultErrorHandler;

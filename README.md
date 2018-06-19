@@ -12,4 +12,6 @@ Dependent on the activated profile, this application can run:
 The application has a small GUI running on port 8080 (implemented using [Vaadin](https://vaadin.com/)) where you can issue single cards, bulk issue cards, redeem cards,
 and view a list of cards.
 
+jdbc:h2:mem:testdb sa
+
  

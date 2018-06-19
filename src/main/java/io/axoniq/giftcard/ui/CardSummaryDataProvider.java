@@ -1,38 +1,39 @@
-package io.axoniq.giftcard.gui;
+package io.axoniq.giftcard.ui;
 
 import com.vaadin.data.provider.CallbackDataProvider;
-import io.axoniq.giftcard.query.CardSummariesUpdatedEvt;
+import io.axoniq.giftcard.query.CardSummariesUpdatedEvent;
 import io.axoniq.giftcard.query.CardSummary;
 import io.axoniq.giftcard.query.CountCardSummariesQuery;
-import io.axoniq.giftcard.query.CountCardSummariesResponse;
+import io.axoniq.giftcard.query.CountCardSummariesResult;
 import io.axoniq.giftcard.query.FindCardSummariesQuery;
-import io.axoniq.giftcard.query.FindCardSummariesResponse;
-import org.axonframework.eventhandling.*;
+import io.axoniq.giftcard.query.FindCardSummariesResult;
+import java.lang.invoke.MethodHandles;
+import java.util.UUID;
+import org.axonframework.eventhandling.AnnotationEventListenerAdapter;
+import org.axonframework.eventhandling.EventBus;
+import org.axonframework.eventhandling.EventHandler;
+import org.axonframework.eventhandling.EventListener;
+import org.axonframework.eventhandling.SimpleEventHandlerInvoker;
+import org.axonframework.eventhandling.SubscribingEventProcessor;
 import org.axonframework.queryhandling.QueryGateway;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.lang.invoke.MethodHandles;
-import java.util.UUID;
-
 public class CardSummaryDataProvider extends CallbackDataProvider<CardSummary, Void> {
 
-    private final static Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
+    private final static Logger logger = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
     private final SubscribingEventProcessor processor;
 
     public CardSummaryDataProvider(QueryGateway queryGateway, EventBus queryUpdateEventBus) {
-        super(
-                q -> {
+        super(q -> {
                     FindCardSummariesQuery query = new FindCardSummariesQuery(q.getOffset(), q.getLimit());
-                    FindCardSummariesResponse response = queryGateway.send(
-                            query, FindCardSummariesResponse.class).join();
+                    FindCardSummariesResult response = queryGateway.send(query, FindCardSummariesResult.class).join();
                     return response.getData().stream();
                 },
                 q -> {
                     CountCardSummariesQuery query = new CountCardSummariesQuery();
-                    CountCardSummariesResponse response = queryGateway.send(
-                            query, CountCardSummariesResponse.class).join();
+                    CountCardSummariesResult response = queryGateway.send(query, CountCardSummariesResult.class).join();
                     return response.getCount();
                 }
         );
@@ -48,8 +49,8 @@ public class CardSummaryDataProvider extends CallbackDataProvider<CardSummary, V
     }
 
     @EventHandler
-    public void on(CardSummariesUpdatedEvt evt) {
-        log.info("received {}", evt);
+    public void on(CardSummariesUpdatedEvent evt) {
+        logger.info("received {}", evt);
         refreshAll();
     }
 

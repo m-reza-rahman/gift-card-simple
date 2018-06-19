@@ -2,11 +2,11 @@ package io.axoniq.giftcard.query;
 
 import java.util.List;
 
-public class FindCardSummariesResponse {
+public class FindCardSummariesResult {
 
     private final List<CardSummary> data;
 
-    public FindCardSummariesResponse(List<CardSummary> data) {
+    public FindCardSummariesResult(List<CardSummary> data) {
         this.data = data;
     }
 

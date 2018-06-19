@@ -1,10 +1,10 @@
 package io.axoniq.giftcard.query;
 
-public class CountCardSummariesResponse {
+public class CountCardSummariesResult {
 
     private final int count;
 
-    public CountCardSummariesResponse(int count) {
+    public CountCardSummariesResult(int count) {
         this.count = count;
     }
 
