@@ -4,6 +4,6 @@ public class CountCardSummariesQuery {
 
     @Override
     public String toString() {
-        return "CountCardSummariesQuery";
+        return "Count card summaries query";
     }
 }

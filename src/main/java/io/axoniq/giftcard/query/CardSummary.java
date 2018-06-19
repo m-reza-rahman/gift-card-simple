@@ -3,11 +3,15 @@ package io.axoniq.giftcard.query;
 import java.time.Instant;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
 @Entity
-@NamedQuery(name = "CardSummary.findCardSummaries",
-        query = "SELECT c FROM CardSummary c ORDER BY c.id")
+@NamedQueries({
+    @NamedQuery(name = "CardSummary.findCardSummaries",
+            query = "SELECT c FROM CardSummary c ORDER BY c.id"),
+    @NamedQuery(name = "CardSummary.countCardSummaries",
+            query = "SELECT COUNT(c) FROM CardSummary c")})
 public class CardSummary {
 
     @Id

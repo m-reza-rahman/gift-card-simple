@@ -11,4 +11,9 @@ public class CountCardSummariesResult {
     public int getCount() {
         return count;
     }
+
+    @Override
+    public String toString() {
+        return "Count card summaries result=" + count;
+    }
 }
