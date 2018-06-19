@@ -13,12 +13,10 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
-import org.springframework.context.annotation.Profile;
 
 /**
  * Simple Axon configuration built around an embedded H2 database.
  */
-@Profile("h2")
 @Configuration
 public class AxonConfig {
 

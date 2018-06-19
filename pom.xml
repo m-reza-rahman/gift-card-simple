@@ -23,7 +23,6 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
         <axon.version>3.1.2</axon.version>
-        <postgresql.jdbc.version>42.2.1</postgresql.jdbc.version>
         <axondb.version>1.1</axondb.version>
         <vaadin.version>8.2.0</vaadin.version>
     </properties>
@@ -41,16 +40,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.flywaydb</groupId>
-            <artifactId>flyway-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <version>${postgresql.jdbc.version}</version>
-            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>com.h2database</groupId>
@@ -127,6 +116,4 @@
             </plugin>
         </plugins>
     </build>
-
-
 </project>
