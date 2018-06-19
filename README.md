@@ -15,6 +15,6 @@ Once the application is up and running, you can access it via http://localhost:8
 Through the UI, you can issue single cards, bulk issue cards, redeem cards, and view a list of cards. You can also see what is going on in the database (including the event store) by navigating to http://localhost:8080/h2. When prompted, just enter the following as the JDBC URL (accept all the other defaults).
 
 ```
-jdbc:h2:mem:testdb sa
+jdbc:h2:mem:testdb
 ```
 ![UI](/screenshots/h2.jpg)
