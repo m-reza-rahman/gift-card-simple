@@ -1,4 +1,4 @@
-package io.axoniq.giftcard.infra.h2;
+package io.axoniq.giftcard.infrastructure;
 
 import io.axoniq.giftcard.query.CardSummaryProjection;
 import org.axonframework.config.EventHandlingConfiguration;
@@ -14,11 +14,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 
-/**
- * Simple Axon configuration built around an embedded H2 database.
- */
 @Configuration
-public class AxonConfig {
+public class AxonConfiguration {
 
     /* Using tracking processors for our read model, which will store there tokens. */
     @Autowired

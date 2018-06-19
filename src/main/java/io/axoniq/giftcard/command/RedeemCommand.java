@@ -20,4 +20,9 @@ public class RedeemCommand {
     public int getAmount() {
         return amount;
     }
+
+    @Override
+    public String toString() {
+        return "Redeem command with ID=" + id + ", amount=" + amount;
+    }
 }

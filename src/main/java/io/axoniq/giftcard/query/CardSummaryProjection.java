@@ -1,7 +1,7 @@
 package io.axoniq.giftcard.query;
 
-import io.axoniq.giftcard.command.IssuedEvt;
-import io.axoniq.giftcard.command.RedeemedEvt;
+import io.axoniq.giftcard.command.IssuedEvent;
+import io.axoniq.giftcard.command.RedeemedEvent;
 import org.axonframework.eventhandling.EventBus;
 import org.axonframework.eventhandling.EventHandler;
 import org.axonframework.eventhandling.Timestamp;
@@ -32,14 +32,14 @@ public class CardSummaryProjection {
     }
 
     @EventHandler
-    public void on(IssuedEvt evt, @Timestamp Instant instant) {
+    public void on(IssuedEvent evt, @Timestamp Instant instant) {
         log.info("projecting {}", evt);
         entityManager.persist(new CardSummary(evt.getId(), evt.getAmount(), instant, evt.getAmount()));
         queryUpdateEventBus.publish(asEventMessage(new CardSummariesUpdatedEvt(evt.getId())));
     }
 
     @EventHandler
-    public void on(RedeemedEvt evt) {
+    public void on(RedeemedEvent evt) {
         log.info("projecting {}", evt);
         CardSummary summary = entityManager.find(CardSummary.class, evt.getId());
         summary.setRemainingValue(summary.getRemainingValue() - evt.getAmount());

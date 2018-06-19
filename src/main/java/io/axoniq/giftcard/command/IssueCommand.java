@@ -17,4 +17,9 @@ public class IssueCommand {
     public int getAmount() {
         return amount;
     }
+
+    @Override
+    public String toString() {
+        return "Issue command with ID=" + id + ", amount=" + amount;
+    }
 }

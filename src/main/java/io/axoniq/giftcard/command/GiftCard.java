@@ -1,16 +1,13 @@
 package io.axoniq.giftcard.command;
 
+import java.lang.invoke.MethodHandles;
+import javax.persistence.Id;
 import org.axonframework.commandhandling.CommandHandler;
-import org.axonframework.commandhandling.model.AggregateIdentifier;
+import static org.axonframework.commandhandling.model.AggregateLifecycle.apply;
 import org.axonframework.eventsourcing.EventSourcingHandler;
 import org.axonframework.spring.stereotype.Aggregate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.lang.invoke.MethodHandles;
-import javax.persistence.Id;
-
-import static org.axonframework.commandhandling.model.AggregateLifecycle.apply;
 
 @Aggregate
 public class GiftCard {
@@ -22,40 +19,45 @@ public class GiftCard {
     private int remainingValue;
 
     public GiftCard() {
-        logger.info("empty constructor invoked");
+        logger.info("Empty gift card created.");
     }
 
     @CommandHandler
-    public GiftCard(IssueCmd cmd) {
-        logger.info("handling {}", cmd);
-        if (cmd.getAmount() <= 0) {
-            throw new IllegalArgumentException("amount <= 0");
+    public GiftCard(IssueCommand issueCommand) {
+        logger.info("Handling {}", issueCommand);
+
+        if (issueCommand.getAmount() <= 0) {
+            throw new IllegalArgumentException("Issue amount cannot be negative");
         }
-        apply(new IssuedEvt(cmd.getId(), cmd.getAmount()));
+
+        apply(new IssuedEvent(issueCommand.getId(), issueCommand.getAmount()));
     }
 
     @CommandHandler
-    public void handle(RedeemCmd cmd) {
-        logger.info("handling {}", cmd);
-        if (cmd.getAmount() <= 0) {
-            throw new IllegalArgumentException("amount <= 0");
+    public void handle(RedeemCommand redeemCommand) {
+        logger.info("Handling {}", redeemCommand);
+
+        if (redeemCommand.getAmount() <= 0) {
+            throw new IllegalArgumentException("Redeem amount cannot be negative");
         }
-        if (cmd.getAmount() > remainingValue) {
-            throw new IllegalStateException("amount > remaining value");
+
+        if (redeemCommand.getAmount() > remainingValue) {
+            throw new IllegalStateException("Redeem amount cannot be greater than remaining value");
         }
-        apply(new RedeemedEvt(id, cmd.getAmount()));
+
+        apply(new RedeemedEvent(id, redeemCommand.getAmount()));
     }
 
     @EventSourcingHandler
-    public void on(IssuedEvt evt) {
-        logger.info("applying {}", evt);
-        id = evt.getId();
-        remainingValue = evt.getAmount();
+    public void on(IssuedEvent IssuedEvent) {
+        logger.info("applying {}", IssuedEvent);
+        id = IssuedEvent.getId();
+        remainingValue = IssuedEvent.getAmount();
         logger.info("new remaining value: {}", remainingValue);
     }
 
     @EventSourcingHandler
-    public void on(RedeemedEvt evt) {
+    public void on(RedeemedEvent evt) {
         logger.info("applying {}", evt);
         remainingValue -= evt.getAmount();
         logger.info("new remaining value: {}", remainingValue);

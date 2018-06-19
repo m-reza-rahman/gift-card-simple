@@ -2,11 +2,20 @@ package io.axoniq.giftcard.gui;
 
 import com.vaadin.annotations.Push;
 import com.vaadin.server.DefaultErrorHandler;
+import com.vaadin.server.Sizeable.Unit;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.spring.annotation.SpringUI;
-import com.vaadin.ui.*;
-import io.axoniq.giftcard.command.IssueCmd;
-import io.axoniq.giftcard.command.RedeemCmd;
+import com.vaadin.ui.Button;
+import com.vaadin.ui.FormLayout;
+import com.vaadin.ui.Grid;
+import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.Notification;
+import com.vaadin.ui.Panel;
+import com.vaadin.ui.TextField;
+import com.vaadin.ui.UI;
+import com.vaadin.ui.VerticalLayout;
+import io.axoniq.giftcard.command.IssueCommand;
+import io.axoniq.giftcard.command.RedeemCommand;
 import io.axoniq.giftcard.query.CardSummary;
 import java.lang.invoke.MethodHandles;
 import java.util.UUID;
@@ -52,7 +61,9 @@ public class GiftcardUI extends UI {
             public void error(com.vaadin.server.ErrorEvent event) {
                 Throwable cause = event.getThrowable();
                 log.error("an error occured", cause);
-                while(cause.getCause() != null) cause = cause.getCause();
+                while (cause.getCause() != null) {
+                    cause = cause.getCause();
+                }
                 Notification.show("Error", cause.getMessage(), Notification.Type.ERROR_MESSAGE);
             }
         });
@@ -70,7 +81,7 @@ public class GiftcardUI extends UI {
         Button submit = new Button("Submit");
 
         submit.addClickListener(evt -> {
-            commandGateway.sendAndWait(new IssueCmd(id.getValue(), Integer.parseInt(amount.getValue())));
+            commandGateway.sendAndWait(new IssueCommand(id.getValue(), Integer.parseInt(amount.getValue())));
             Notification.show("Success", Notification.Type.HUMANIZED_MESSAGE);
         });
 
@@ -89,9 +100,9 @@ public class GiftcardUI extends UI {
         Button submit = new Button("Submit");
 
         submit.addClickListener(evt -> {
-            for(int i = 0; i < Integer.parseInt(number.getValue()); i++) {
+            for (int i = 0; i < Integer.parseInt(number.getValue()); i++) {
                 String id = UUID.randomUUID().toString().substring(0, 11).toUpperCase();
-                commandGateway.sendAndWait(new IssueCmd(id, Integer.parseInt(amount.getValue())));
+                commandGateway.sendAndWait(new IssueCommand(id, Integer.parseInt(amount.getValue())));
             }
             Notification.show("Success", Notification.Type.HUMANIZED_MESSAGE);
         });
@@ -111,7 +122,7 @@ public class GiftcardUI extends UI {
         Button submit = new Button("Submit");
 
         submit.addClickListener(evt -> {
-            commandGateway.sendAndWait(new RedeemCmd(id.getValue(), Integer.parseInt(amount.getValue())));
+            commandGateway.sendAndWait(new RedeemCommand(id.getValue(), Integer.parseInt(amount.getValue())));
             Notification.show("Success", Notification.Type.HUMANIZED_MESSAGE);
         });
 
