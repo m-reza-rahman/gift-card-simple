@@ -49,15 +49,18 @@ public class CardSummaryProjection {
     }
 
     @QueryHandler
-    public FindCardSummariesResult handle(FindCardSummariesQuery query) {
-        logger.info("handling {}", query);
-        Query jpaQuery = entityManager.createQuery("SELECT c FROM CardSummary c ORDER BY c.id",
+    public FindCardSummariesResult handle(FindCardSummariesQuery findCardSummariesQuery) {
+        logger.info("Handling {}", findCardSummariesQuery);
+
+        Query jpaQuery = entityManager.createNamedQuery("CardSummary.findCardSummaries",
                 CardSummary.class);
-        jpaQuery.setFirstResult(query.getOffset());
-        jpaQuery.setMaxResults(query.getLimit());
-        FindCardSummariesResult response = new FindCardSummariesResult(jpaQuery.getResultList());
-        logger.info("returning {}", response);
-        return response;
+        jpaQuery.setFirstResult(findCardSummariesQuery.getOffset());
+        jpaQuery.setMaxResults(findCardSummariesQuery.getLimit());
+        FindCardSummariesResult result = new FindCardSummariesResult(jpaQuery.getResultList());
+
+        logger.info("Returning results {}", result);
+
+        return result;
     }
 
     @QueryHandler

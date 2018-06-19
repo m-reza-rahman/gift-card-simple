@@ -3,8 +3,11 @@ package io.axoniq.giftcard.query;
 import java.time.Instant;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 
 @Entity
+@NamedQuery(name = "CardSummary.findCardSummaries",
+        query = "SELECT c FROM CardSummary c ORDER BY c.id")
 public class CardSummary {
 
     @Id
@@ -45,5 +48,10 @@ public class CardSummary {
 
     void setRemainingValue(int remainingValue) {
         this.remainingValue = remainingValue;
+    }
+
+    @Override
+    public String toString() {
+        return "Card summary with ID=" + id + ", initialValue=" + initialValue + ", issuedAt=" + issuedAt + ", remainingValue=" + remainingValue;
     }
 }

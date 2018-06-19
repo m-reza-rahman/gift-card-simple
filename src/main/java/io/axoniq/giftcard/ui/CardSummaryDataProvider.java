@@ -29,7 +29,7 @@ public class CardSummaryDataProvider extends CallbackDataProvider<CardSummary, V
         super(q -> {
                     FindCardSummariesQuery query = new FindCardSummariesQuery(q.getOffset(), q.getLimit());
                     FindCardSummariesResult response = queryGateway.send(query, FindCardSummariesResult.class).join();
-                    return response.getData().stream();
+                    return response.getCardSummaries().stream();
                 },
                 q -> {
                     CountCardSummariesQuery query = new CountCardSummariesQuery();
