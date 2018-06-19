@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.lang.invoke.MethodHandles;
+import javax.persistence.Id;
 
 import static org.axonframework.commandhandling.model.AggregateLifecycle.apply;
 
@@ -16,7 +17,7 @@ public class GiftCard {
 
     private final static Logger logger = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
-    @AggregateIdentifier
+    @Id
     private String id;
     private int remainingValue;
 
@@ -27,15 +28,21 @@ public class GiftCard {
     @CommandHandler
     public GiftCard(IssueCmd cmd) {
         logger.info("handling {}", cmd);
-        if(cmd.getAmount() <= 0) throw new IllegalArgumentException("amount <= 0");
+        if (cmd.getAmount() <= 0) {
+            throw new IllegalArgumentException("amount <= 0");
+        }
         apply(new IssuedEvt(cmd.getId(), cmd.getAmount()));
     }
 
     @CommandHandler
     public void handle(RedeemCmd cmd) {
         logger.info("handling {}", cmd);
-        if(cmd.getAmount() <= 0) throw new IllegalArgumentException("amount <= 0");
-        if(cmd.getAmount() > remainingValue) throw new IllegalStateException("amount > remaining value");
+        if (cmd.getAmount() <= 0) {
+            throw new IllegalArgumentException("amount <= 0");
+        }
+        if (cmd.getAmount() > remainingValue) {
+            throw new IllegalStateException("amount > remaining value");
+        }
         apply(new RedeemedEvt(id, cmd.getAmount()));
     }
 
