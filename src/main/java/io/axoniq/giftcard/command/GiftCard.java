@@ -18,7 +18,7 @@ public class GiftCard {
     private String id;
     private int remainingValue;
 
-    public GiftCard() {
+    protected GiftCard() {
         logger.info("Empty gift card created.");
     }
 

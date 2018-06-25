@@ -20,7 +20,7 @@ public class CardSummary {
     private final Instant issuedAt;
     private int remainingValue;
 
-    public CardSummary() {
+    protected CardSummary() {
         this.id = null;
         this.initialValue = 0;
         this.issuedAt = null;
