@@ -4,8 +4,6 @@ import io.axoniq.giftcard.query.CardSummaryProjection;
 import org.axonframework.config.EventHandlingConfiguration;
 import org.axonframework.eventhandling.EventBus;
 import org.axonframework.eventhandling.SimpleEventBus;
-import org.axonframework.eventhandling.saga.repository.SagaStore;
-import org.axonframework.eventhandling.saga.repository.inmemory.InMemorySagaStore;
 import org.axonframework.eventsourcing.eventstore.EmbeddedEventStore;
 import org.axonframework.eventsourcing.eventstore.EventStorageEngine;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,11 +33,5 @@ public class AxonConfiguration {
     @Qualifier("queryUpdates")
     public EventBus queryUpdateEventBus() {
         return new SimpleEventBus();
-    }
-
-    /* We won't use Sagas. Configuring an in-mem sagastore to avoid auto-creation of a JPA-based instance. */
-    @Bean
-    public SagaStore sagaStore() {
-        return new InMemorySagaStore();
     }
 }
