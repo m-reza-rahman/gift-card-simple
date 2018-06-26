@@ -1,16 +1,17 @@
 package io.axoniq.giftcard.command;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class IssuedEvent {
 
-    private String id;
-    private int amount;
+    private final String id;
+    private final int amount;
 
-    public IssuedEvent() {
-        id = null;
-        amount = 0;
-    }
-
-    public IssuedEvent(String id, int amount) {
+    @JsonCreator
+    public IssuedEvent(
+            @JsonProperty("id") String id,
+            @JsonProperty("amount") int amount) {
         this.id = id;
         this.amount = amount;
     }
@@ -19,16 +20,8 @@ public class IssuedEvent {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
     public int getAmount() {
         return amount;
-    }
-
-    public void setAmount(int amount) {
-        this.amount = amount;
     }
 
     @Override
