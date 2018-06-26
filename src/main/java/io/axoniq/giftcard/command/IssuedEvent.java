@@ -2,8 +2,13 @@ package io.axoniq.giftcard.command;
 
 public class IssuedEvent {
 
-    private final String id;
-    private final int amount;
+    private String id;
+    private int amount;
+
+    public IssuedEvent() {
+        id = null;
+        amount = 0;
+    }
 
     public IssuedEvent(String id, int amount) {
         this.id = id;
@@ -14,8 +19,16 @@ public class IssuedEvent {
         return id;
     }
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public int getAmount() {
         return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
 
     @Override
