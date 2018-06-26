@@ -17,7 +17,7 @@ import org.springframework.context.annotation.Primary;
 @Configuration
 public class AxonConfiguration {
 
-    /* Using tracking processors for our read model, which will store there tokens. */
+    /* Using tracking processors for our read model, which will store their tokens. */
     @Autowired
     public void configure(EventHandlingConfiguration configuration) {
         configuration.registerTrackingProcessor(CardSummaryProjection.class.getPackage().getName());
@@ -30,7 +30,7 @@ public class AxonConfiguration {
         return new EmbeddedEventStore(eventStorageEngine);
     }
 
-    /* A non-persistent event bus to push messages from our read model. */
+    /* A non-persistent event bus to push messages from our query model. */
     @Bean
     @Qualifier("queryUpdates")
     public EventBus queryUpdateEventBus() {
