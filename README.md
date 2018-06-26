@@ -18,3 +18,20 @@ Through the UI, you can issue single cards, bulk issue cards, redeem cards, and 
 jdbc:h2:mem:testdb
 ```
 ![UI](/screenshots/h2.jpg)
+
+Once logged in, you can see all triggered events stored in the event store by issuing the following SQL:
+
+```sql
+SELECT
+    GLOBAL_INDEX,
+    EVENT_IDENTIFIER,
+    UTF8TOSTRING(META_DATA) AS META_DATA,
+    UTF8TOSTRING(PAYLOAD) AS PAYLOAD,
+    PAYLOAD_TYPE,
+    TIME_STAMP,
+    AGGREGATE_IDENTIFIER,
+    SEQUENCE_NUMBER,
+    TYPE
+FROM
+    DOMAIN_EVENT_ENTRY
+```
