@@ -52,7 +52,7 @@
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-push</artifactId>
         </dependency>
-        
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
