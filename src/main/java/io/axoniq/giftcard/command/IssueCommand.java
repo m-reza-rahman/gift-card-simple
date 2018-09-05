@@ -1,7 +1,10 @@
 package io.axoniq.giftcard.command;
 
+import org.axonframework.commandhandling.TargetAggregateIdentifier;
+
 public class IssueCommand {
 
+    @TargetAggregateIdentifier
     private final String id;
     private final int amount;
 
