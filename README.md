@@ -1,6 +1,6 @@
 # Simple Gift Card
 
-This simple application demonstrates the CQRS (Command Query Responsibility Segregation) and Event Sourcing patterns using the Axon Java Framework. The domain used is gift cards. This application is demoed during this [presentation](https://drive.google.com/file/d/1vfyRJbgimcAqeSpotkdx2Ptj5OIeShVb/view?usp=sharing). [Gift cards](/src/main/java/io/axoniq/giftcard/command/GiftCard.java) themselves are event sourced aggregate entities that constitute the write model, execute commands and emit events. The [read model](/src/main/java/io/axoniq/giftcard/query) handles events, constructs several materialized views and powers several queries.   
+This simple application demonstrates the CQRS (Command Query Responsibility Segregation) and Event Sourcing patterns using the Axon Java Framework. The domain used is gift cards. This application is demoed during this [presentation](https://docs.google.com/presentation/d/1QtXpDijN3NLLnZVS_f5-zwmo1eu8QqI1V4thzXGeBFs/edit?usp=sharing). [Gift cards](/src/main/java/io/axoniq/giftcard/command/GiftCard.java) themselves are event sourced aggregate entities that constitute the write model, execute commands and emit events. The [read model](/src/main/java/io/axoniq/giftcard/query) handles events, constructs several materialized views and powers several queries.   
 
 The Maven based application only requires Java SE 8 (or up). You should be able to open the application in any Maven capable IDE. Once built, you can run the application through the following command.
 
